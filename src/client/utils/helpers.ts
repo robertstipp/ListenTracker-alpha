@@ -10,3 +10,6 @@ export const fmtPct = (number : number | string) : string => {
   return (Number(number) * 100).toFixed(2).toString() + "%"
 }
 
+export const map = (number: number, min1: number, max1: number, min2: number, max2: number ) => {
+  return min2 + ((number - min1) * (max2 - min2)) / (max1 - min1); 
+}
