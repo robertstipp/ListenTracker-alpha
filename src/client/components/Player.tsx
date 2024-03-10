@@ -1,5 +1,5 @@
 import React, {useRef, useState} from 'react'
-import {fmtTime, fmtPct} from '../utils/helpers.ts'
+import {fmtTime, fmtPct, map} from '../utils/helpers.ts'
 import './player.css';
 
 const AudioPlayHead = ({position}) => {
@@ -8,9 +8,10 @@ const AudioPlayHead = ({position}) => {
   const svgSize = 120;
 
   const center = svgSize /2 ;
-  const cx = center + Math.cos(position * 2 * Math.PI) * outerCircleRadius;
-  const cy = center + Math.sin(position * 2 * Math.PI) * outerCircleRadius; 
-  console.log(cy)
+  const angle = map(position, 0, 1, Math.PI, 2 * Math.PI)
+  const cx = center + Math.cos(angle) * outerCircleRadius;
+  const cy = center + Math.sin(angle) * outerCircleRadius; 
+  
   return (
     <svg width={svgSize} height={svgSize}>
       {/* Outer Circle */}
@@ -27,7 +28,7 @@ const AudioPlayHead = ({position}) => {
         cx={cx}
         cy={cy}
         r={playHeadRadius}
-        fill="red"
+        fill={position > .9 ? "green" : "red"}
       />
     </svg>
   )
@@ -86,10 +87,11 @@ const Player = () => {
     </div>
     <audio  controls id="myAudio" onLoadedData={handleLoadedData} onTimeUpdate={handleTimeUpdate} src="/music" ></audio>
     <div>
-      <h1>Percentage Played:</h1>
-      <h3 ref={pctPlayedStatusBar} id="pctPlayed">{percentPlayed}</h3>
+      <AudioPlayHead position={trackPosition} />
+      {/* <h1>Percentage Played:</h1> */}
+      {/* <h3 ref={pctPlayedStatusBar} id="pctPlayed">{percentPlayed}</h3> */}
     </div>
-    <AudioPlayHead position={trackPosition} />
+    
   </div>
   )
 }
