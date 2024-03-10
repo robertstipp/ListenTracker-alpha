@@ -60,7 +60,7 @@ const config = {
     },
     proxy: [
       {
-        context: ["/albumArt", "/music"],
+        context: ["/albumArt", "/music", "/logListen"],
         target: "http://localhost:3000",
       },
     ],

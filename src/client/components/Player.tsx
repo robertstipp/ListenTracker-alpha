@@ -1,6 +1,8 @@
 import React, {useRef, useState} from 'react'
 import {fmtTime, fmtPct} from '../utils/helpers.ts'
 import './player.css';
+
+
 const Player = () => {
   const pctPlayedStatusBar = useRef<HTMLHeadingElement>(null);
   const [trackDuration, setTrackDuration] = useState<string | number>("00:00")
@@ -8,17 +10,18 @@ const Player = () => {
   const [percentPlayed , setPercentagePlayed] = useState<string | number>("0%")
   const [complete, setComplete] = useState<boolean>(false);
 
-  const handleLoadedData = (e) => {
+  const handleLoadedData = (e) : void => {
     const {duration} = e.target;
     setTrackDuration(fmtTime(duration));
   }
 
-  const handleTimeUpdate = (e) => {
+  const handleTimeUpdate = async (e) : Promise<void> => {
     const {duration,currentTime} = e.target;
     const percentage = currentTime / duration;
 
-    if (percentage > .9) {
+    if (percentage > .9 && !complete) {
       setComplete(true);
+      await logListen()
     }
 
     if (complete) {
@@ -34,13 +37,13 @@ const Player = () => {
         pctPlayedStatusBar.current.style.background = `linear-gradient(to right, green ${fmtPct(percentage)}, red ${fmtPct(percentage)}, red 100%)`;
       }
     }
-
-
     setCurrentTime(fmtTime(currentTime));
-
-    
-    
-  } 
+  }
+  
+  const logListen = async () : Promise<void> => {
+    const response = await fetch('/logListen')
+  }
+  logListen()
   return (
     <div id="mainContent">
     <h5>Classic Jazz</h5>
