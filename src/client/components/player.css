@@ -15,12 +15,17 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
 }
 
 #albumArt {
-  width: 60%;
+  width: 50%;
   height: auto;
   border-radius: 50%;
   display: block;
+}
+
+#playHead {
+  position: absolute;
 }
 
