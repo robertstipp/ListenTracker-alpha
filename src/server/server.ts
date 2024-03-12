@@ -1,5 +1,9 @@
 import express from 'express';
 import path from 'path'
+const multer = require('multer'); 
+const multerStore = require('./processing/processAudio.service'); 
+const ffmpeg = require('fluent-ffmpeg'); 
+const upload = multer({dest: 'uploads'}); 
 const app = express();
 
 
@@ -18,7 +22,14 @@ app.get("/albumArt", (req, res) => {
 })
 
 // Upload Audio Route
-app.post('/upload', (req,res)=>{
+app.post('/upload', upload.single('musicFile'), (req,res)=>{
+  
+  // console.log(req.file)
+  // const file = req.file as Express.Multer.File;
+  // const filePath = req.file.path; 
+
+
+
   console.log('Upload received')
   res.status(200).send('OK')
 })
