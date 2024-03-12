@@ -29,3 +29,29 @@
   position: absolute;
 }
 
+#iconsContainer {
+  display: flex;
+  flex-direction: row;
+  padding: 1em;
+  gap: 0.75em;
+}
+
+#instagram {
+  height: 2em;
+  width: 2em;
+}
+
+#x {
+  height: 2em;
+  width: 2em;
+}
+
+#facebook {
+  height: 2em;
+  width: 2em;
+}
+
+#tiktok {
+  height: 2em;
+  width: 2em;
+}

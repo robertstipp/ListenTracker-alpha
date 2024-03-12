@@ -1,5 +1,11 @@
 import React, { useRef, useState } from 'react';
 import { fmtTime, fmtPct, map } from '../utils/helpers.ts';
+import albumart from '../../../data/albumart-demo.jpeg';
+import instagramIcon from '../../assets/Instagram_Glyph_Gradient.png';
+import xIcon from '../../assets/X.png';
+import facebookIcon from '../../assets/Facebook_Logo_Primary.png';
+import tiktok from '../../assets/Tiktok.png';
+import './player.css';
 
 const AudioPlayHead = ({ position, size }) => {
   const outerCircleRadius = size * 0.45;
@@ -82,8 +88,8 @@ const Player = () => {
         <span id="currTime">{currentTime}</span> |{' '}
         <span id="trackDuration">{trackDuration}</span>
       </p>
-      {/* <div id="artContainer">
-        {albumImageRef && (
+      <div id="artContainer">
+        {/* {albumImageRef && (
           <AudioPlayHead
             position={trackPosition}
             size={albumImageRef.current?.width * 1.2}
@@ -95,8 +101,8 @@ const Player = () => {
           id="albumArt"
           src="/albumArt"
           alt=""
-        />
-      </div> */}
+        /> */}
+      </div>
       <audio
         controls
         id="myAudio"
@@ -108,10 +114,12 @@ const Player = () => {
         {/* <h1>Percentage Played:</h1> */}
         {/* <h3 ref={pctPlayedStatusBar} id="pctPlayed">{percentPlayed}</h3> */}
       </div>
-      <img
-        src={'../../assets/Instagram_Glyph_Gradient.png'}
-        alt="Icon description"
-      ></img>
+      <div id="iconsContainer">
+        <img src={instagramIcon} alt="Instagram Icon" id="instagram"></img>
+        <img src={xIcon} alt="X (formerly Twitter) Icon" id="x"></img>
+        <img src={facebookIcon} alt="Facebook Icon" id="facebook"></img>
+        <img src={tiktok} alt="Tiktok Icon" id="tiktok"></img>
+      </div>
     </div>
   );
 };
